@@ -1,0 +1,67 @@
+{% include 'layout/header.html' %}
+<body>
+    {% load static %}
+    {% include 'layout/navbar.html' %}
+
+    <div class="container">
+        <h1 class="mt-4">Add a character</h1>
+
+        {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{error_message}}
+        </div>
+        {% endif %}
+
+        <form action="{% url 'game:characters-store' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group my-2">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter a name" required>
+            </div>
+            <div class="form-group my-2">
+                <label for="name">HP</label>
+                <input type="number" class="form-control" id="hp" name="hp" placeholder="Enter hp" required>
+            </div>
+            <div class="form-group my-2">
+                <label for="name">Mana</label>
+                <input type="number" class="form-control" id="mana" name="mana" placeholder="Enter mana" required>
+            </div>
+            <div class="form-group my-2">
+                <label for="weapon">Weapon</label>
+                <select class="form-control" id="weapon" name="weapon"> 
+                    {% for weapon in weapons %}
+                        <option value="{{weapon.id}}">{{weapon.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group my-2">
+                <label for="armor">Armor</label>
+                <select class="form-control" id="armor" name="armor">
+                    {% for armor in armors %}
+                        <option value="{{armor.id}}">{{armor.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group my-2">
+                <label for="spell">Spell</label>
+                <select class="form-control" id="spell" name="spell">
+                    <option></option>
+                    {% for spell in spells %}
+                        <option value="{{spell.id}}">{{spell.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group my-2">
+                <label for="type_character">Type character</label>
+                <select class="form-control" id="type_character" name="type_character">
+                    {% for type_character in types_character %}
+                        <option value="{{type_character.id}}">{{type_character.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+          </form>
+    </div>
+</body>
+</html>

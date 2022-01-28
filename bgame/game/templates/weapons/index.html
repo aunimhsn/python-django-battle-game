@@ -1,0 +1,22 @@
+{% include 'layout/header.html' %}
+<body>
+    {% load static %}
+    {% include 'layout/navbar.html' %}
+
+    <div class="container">
+        <h1 class="mt-4">Weapons</h1>
+        <a class="btn btn-success" href="{% url 'game:weapons-create' %}" role="button">Add a weapon</a>
+        
+        {% for weapon in weapons %}
+        <div class="my-4">
+            <div class="my-2">
+                <p><strong>Weapon:</strong> {{weapon.name}} ({{weapon.damage}} damage)</p>
+                <img src="{% static 'game/weapons/' %}{{weapon.icon_path}}" width="30" height="30">
+            </div>
+        </div>
+        <hr/>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

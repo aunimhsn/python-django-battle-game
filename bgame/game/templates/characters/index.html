@@ -1,0 +1,36 @@
+{% include 'layout/header.html' %}
+<body>
+    {% load static %}
+    {% include 'layout/navbar.html' %}
+
+    <div class="container">
+        <h1 class="mt-4">Characters</h1>
+        <a class="btn btn-success" href="{% url 'game:characters-create' %}" role="button">Add a character</a>
+        
+        {% for character in characters %}
+        <div class="my-4">
+            <h4>{{character.name}}</h4>
+            <h6 class="text-secondary">{{character.type_character.name|upper}}</h6>
+            <p><strong>HP:</strong> {{character.hp}}</p>
+            <p><strong>Mana:</strong> {{character.mana}}</p>
+            <div class="my-2">
+                <p class="mb-2"><strong>Weapon:</strong> {{character.weapon.name}} ({{character.weapon.damage}} damage)</p>
+                <img src="{% static 'game/weapons/' %}{{character.weapon.icon_path}}" width="30" height="30">
+            </div>
+            <div class="my-2">
+                <p class="mb-2"><strong>Armor:</strong> {{character.armor.name}}</p>
+                <img src="{% static 'game/armors/' %}{{character.armor.icon_path}}" width="30" height="30">
+            </div>
+            {% if character.spell %}
+            <div class="my-2">
+                <p class="mb-2"><strong>Spell:</strong> {{character.spell.name}} ({{character.spell.mana}} mana)</p>
+                <img src="{% static 'game/spells/' %}{{character.spell.icon_path}}" width="30" height="30">
+            </div>
+            {% endif %}
+        </div>
+        <hr/>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
